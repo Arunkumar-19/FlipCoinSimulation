@@ -1,10 +1,19 @@
 #!/bin/bash
 
-flip=$((RANDOM%2))
+head=0;
+tail=0;
+num=10;
 
-if [ $flip -eq 1 ]
-then
-	echo "Heads"
-else
-	echo "Tails"
-fi
+for (( i=0; i<=$num; i++ ))
+do
+        flip=$((RANDOM%2))
+        if [ $flip -eq 1 ]
+        then
+                ((head++))
+        else
+                ((tail++))
+        fi
+done
+
+echo "Times head was flipped : " $head
+echo "Times tail was flipped : " $tail
