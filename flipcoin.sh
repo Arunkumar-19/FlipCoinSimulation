@@ -1,19 +1,39 @@
 #!/bin/bash
 
-head=0;
-tail=0;
-num=10;
+c_head=0;
+c_tail=0;
+count=0;
+first=0;
+last=1;
+diff=$(( last-first+1 ))
 
-for (( i=0; i<=$num; i++ ))
+while [[ $c_tail -lt 21 || $c_head -lt 21 ]]
 do
-        flip=$((RANDOM%2))
-        if [ $flip -eq 1 ]
-        then
-                ((head++))
-        else
-                ((tail++))
-        fi
-done
+	result=$((first + $(( $RANDOM%diff )) ))
+	echo $result
 
-echo "Times head was flipped : " $head
-echo "Times tail was flipped : " $tail
+        if [ $result -eq 1 ]
+        then
+                ((c_head++))
+	echo "head" $c_head;
+        else
+                ((c_tail++))
+	echo "tail" $c_tail;
+        fi
+((count++))
+
+  if [ $c_head -eq 21 ]
+  then
+	echo "head won 21 times"
+  exit
+  elif [ $c_tail -eq 21 ]
+  then
+	echo "Tail won 21 times"
+  exit
+  elif [[ $c_head -eq 21 && $c_tail -eq 21 ]]
+  then
+	echo "Tie: Both tail and head win same times"
+  exit
+  fi
+done
+echo $count
